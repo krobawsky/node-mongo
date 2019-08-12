@@ -1,0 +1,68 @@
+<% include partials/_header %>
+<div class="container">
+    <div class="row">
+        <!--FORM-->
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/edit/<%= task._id %>" method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="title" placeholder="Title"
+                                value="<%= task.title %>">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="description" cols="80"
+                                placeholder="Add a Description"><%= task.description %></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="tiempo" placeholder="Title"
+                                value="<%= task.tiempo %>">
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add/<%= task._id %>" method="post">
+                        <div class="form-group">
+                            <textarea class="form-control" name="detalle" cols="80"
+                                placeholder="Add a Sub tarea"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="tiempo" placeholder="Tiempo">
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            Agregar sub tarea
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- LIST -->
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Detalle</th>
+                        <th>Tiempo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0; i < task.sub_tasks.length; i++) { %>
+                    <tr>
+                        <td><%= i + 1%></td>
+                        <td><%= task.sub_tasks[i].detalle %></td>
+                        <td><%= task.sub_tasks[i].tiempo %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<% include partials/_footer%>
